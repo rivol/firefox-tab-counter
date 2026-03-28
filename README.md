@@ -39,9 +39,12 @@ Add an `exec` input to your Telegraf config:
 ```toml
 [[inputs.exec]]
   commands = ["/path/to/tab_count.py --influx"]
-  timeout = "5s"
+  interval = "10m"
+  timeout = "30s"
   data_format = "influx"
 ```
+
+The first run may take longer as uv installs the `lz4` dependency. Subsequent runs are fast (~0.2s) since uv caches the environment.
 
 This produces the `firefox_tabs` measurement with three fields:
 
